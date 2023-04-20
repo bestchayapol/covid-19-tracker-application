@@ -10,7 +10,7 @@ import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
 import LineGraph from "./components/LineGraph";
-import { sortData } from "./components/util";
+import { prettyPrintStat, sortData } from "./components/util";
 
 import "./App.css";
 import "leaflet/dist/leaflet.css";
@@ -24,14 +24,14 @@ function App() {
   const [casesType, setCasesType] = useState("cases");
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
-  
+
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
-    .then((response) => response.json())
-    .then(data => {
-      setCountryInfo(data);
-    })
-  }, [])
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  }, []);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -42,9 +42,10 @@ function App() {
             name: country.country, //United States, United Kingdom
             value: country.countryInfo.iso2, //UK, USA, FR
           }));
-          
+
           const sortedData = sortData(data);
           setTableData(sortedData);
+          setMapCountries(data);
           setCountries(countries);
         });
     };
@@ -91,12 +92,32 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
-          <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
-          <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
+          <InfoBox
+            active={casesType === "cases"}
+            onClick={(e) => setCasesType("cases")}
+            title="Cases"
+            isRed
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={prettyPrintStat(countryInfo.cases)}
+          />
+          <InfoBox
+            active={casesType === "recovered"}
+            onClick={(e) => setCasesType("recovered")}
+            title="Recovered"
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={prettyPrintStat(countryInfo.recovered)}
+          />
+          <InfoBox
+            active={casesType === "deaths"}
+            onClick={(e) => setCasesType("deaths")}
+            title="Deaths"
+            isRed
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={prettyPrintStat(countryInfo.deaths)}
+          />
         </div>
 
-        <Map 
+        <Map
           countries={mapCountries}
           casesType={casesType}
           center={mapCenter}
@@ -105,10 +126,12 @@ function App() {
       </div>
       <Card className="app__right">
         <CardContent>
-          <h3>Live Cases by Country</h3>
-          <Table countries={tableData} />
-          <h3>Worldwide new cases</h3>
-          <LineGraph casesType={casesType}/>
+          <div className="app__information">
+            <h3>Live Cases by Country</h3>
+            <Table countries={tableData} />
+            <h3>Worldwide new {casesType}</h3>
+            <LineGraph casesType={casesType} />
+          </div>
         </CardContent>
       </Card>
     </div>
