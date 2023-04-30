@@ -4,7 +4,14 @@
 body {
   background-color: #f5f6fa;
 }
-
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+  padding: 1rem 0.5rem;
+}
 .app {
   display: flex;
   justify-content: space-evenly;
