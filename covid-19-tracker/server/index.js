@@ -1,30 +1,121 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 const app = express();
 const port = 6105;
 
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+
+app.use(cookieParser());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  })
+);
 
 const db = mysql.createConnection({
   user: "lab_18ocvw",
   host: "server2.bsthun.com",
   password: "JMEwRDqcN0mB6b56",
   database: "lab_blank01_183bypx",
+  port: "6105",
 });
 
 app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
+
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
+    }
+    db.query(
+      "INSERT INTO Register (username, password, `confirm password`) VALUES (?,?,?)",
+      [username, hash, hash],
+      (err, result) => {
+        console.log(err);
+        console.log(result);
+      }
+    );
+
+    db.query(
+      "INSERT INTO `Sign-In` (username, password) VALUES (?,?)",
+      [username, hash],
+      (err, result) => {
+        console.log(err);
+        console.log(result);
+      }
+    );
+  });
+});
+
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({loggedIn: true, user: req.session.user});
+  }
+  else {
+    res.send({loggedIn: false});
+  }
+});
+
+app.get("/account", (req, res) => {
+  if (req.session.user) {
+    res.send({loggedIn: true, user: req.session.user});
+  }
+  else {
+    res.send({loggedIn: false});
+  }
+});
+
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
   db.query(
-    "INSERT INTO Register (username, password, confirm password) VALUES (?,?,?)",
-    [username, password, confirmPassword],
+    "SELECT * FROM `Sign-In` WHERE username = ?",
+    username,
     (err, result) => {
-      console.log(err);
+      if (err) {
+        res.send({ err: err });
+      }
+
+      if (result.length > 0) {
+        bcrypt.compare(password, result[0].password, (error, response) => {
+          if (response) {
+            req.session.user = result;
+            console.log(req.session.user);
+            res.send(result);
+          } else {
+            res.send({ message: "Wrong username or password combination" });
+          }
+        });
+      } else {
+        res.send({ message: "User doesn't exist" });
+      }
     }
   );
 });

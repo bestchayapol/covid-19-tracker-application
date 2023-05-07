@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
@@ -8,11 +8,25 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import Axios from "axios";
+
 import "../styles/Register.css";
 
 function Account() {
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [username, setUsername] = useState("");
+
+  Axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    Axios.get("http://localhost:6105/login").then((response) => {
+      console.log(response);
+      if (response.data.loggedIn == true) {
+        setUsername(response.data.user[0].username);
+      }
+    })
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,7 +77,7 @@ function Account() {
         <AccountCircleIcon sx={{ fontSize: 150 }} />
       </center>
 
-      <h2 className="accountUsername">Best</h2>
+      <h2 className="accountUsername">{username}</h2>
 
       <Button
         style={{ marginBottom: "1.5rem" }}
