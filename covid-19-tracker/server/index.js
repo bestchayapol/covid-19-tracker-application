@@ -75,19 +75,17 @@ app.post("/register", (req, res) => {
 
 app.get("/login", (req, res) => {
   if (req.session.user) {
-    res.send({loggedIn: true, user: req.session.user});
-  }
-  else {
-    res.send({loggedIn: false});
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
   }
 });
 
 app.get("/account", (req, res) => {
   if (req.session.user) {
-    res.send({loggedIn: true, user: req.session.user});
-  }
-  else {
-    res.send({loggedIn: false});
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
   }
 });
 
@@ -118,6 +116,54 @@ app.post("/login", (req, res) => {
       }
     }
   );
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error logging out:", err);
+      res.sendStatus(500); // Return a server error status code
+    } else {
+      res.clearCookie("userId"); // Clear the userId cookie
+      res.sendStatus(200); // Return a success status code
+    }
+  });
+});
+
+app.post("/delete-account", (req, res) => {
+  const userId = req.session.user[0].userId; // Assuming the user ID is stored in the session
+
+  // Delete from Register table
+  db.query("DELETE FROM `Register` WHERE userId = ?", userId, (err, result) => {
+    if (err) {
+      console.error("Error deleting account from Register table:", err);
+      res.sendStatus(500); // Return a server error status code
+      return;
+    }
+
+    // Delete from Sign-In table
+    db.query(
+      "DELETE FROM `Sign-In` WHERE username = ?",
+      req.session.user[0].username,
+      (err, result) => {
+        if (err) {
+          console.error("Error deleting account from Sign-In table:", err);
+          res.sendStatus(500); // Return a server error status code
+          return;
+        }
+
+        req.session.destroy((err) => {
+          if (err) {
+            console.error("Error logging out:", err);
+            res.sendStatus(500); // Return a server error status code
+          } else {
+            res.clearCookie("userId"); // Clear the userId cookie
+            res.sendStatus(200); // Return a success status code
+          }
+        });
+      }
+    );
+  });
 });
 
 app.listen(port, () => {
