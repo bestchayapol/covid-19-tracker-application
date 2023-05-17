@@ -15,6 +15,10 @@
     border-color: red;
 }
 
+.infoBox__title {
+    display: flex;
+}
+
 .infoBox__cases--green {
     color: lightgreen !important;
 }
@@ -24,6 +28,7 @@
     font-weight: 600;
     font-size: 1.75rem;
     margin-bottom: 0.5rem;
+    display: flex;
 }
 
 .infoBox__total {
@@ -31,4 +36,10 @@
     font-weight: 700 !important;
     font-size: 0.8rem !important;
     margin-top: 15px !important;
+}
+
+@media (max-width: 520px) {
+    .infoBox {
+        margin: 20px;
+    }
 }

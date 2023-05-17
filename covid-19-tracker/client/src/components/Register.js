@@ -6,18 +6,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import axios from "../api/axios";
 import "../styles/Register.css";
 import { blue } from "@mui/material/colors";
 import Axios from "axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/register";
 
 function Register() {
   const userRef = useRef();
-  const errRef = useRef();
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
@@ -34,8 +31,7 @@ function Register() {
   const [accepted, setAccepted] = useState(false);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [, setErrMsg] = useState("");
 
   Axios.defaults.withCredentials = true;
   
@@ -93,7 +89,7 @@ function Register() {
     <div className="container_register">
       <section>
         <center>
-          <AccountCircleIcon sx={{ fontSize: 75, color: blue }} />
+          <AccountCircleIcon sx={{ fontSize: 100, color: blue }} />
         </center>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">

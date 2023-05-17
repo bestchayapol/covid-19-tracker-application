@@ -33,3 +33,10 @@
 .info-container {
     width: 150px;
 }
+
+@media (max-width: 520px) {
+    .map {
+        margin: 20px;
+        align-items: center;
+    }
+}

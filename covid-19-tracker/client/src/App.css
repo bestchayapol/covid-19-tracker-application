@@ -74,6 +74,20 @@ body {
 
 @media (max-width: 990px) {
   .app {
-  flex-direction: column; 
+    flex-direction: column; 
+  }
+}
+
+@media (max-width: 520px) {
+  .app .app__header {
+    margin-top: 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+  .app__stats {
+    flex-direction: column;
+  }
+  h1, .app__right{
+    margin: 20px;
   }
 }

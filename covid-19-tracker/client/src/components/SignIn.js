@@ -1,22 +1,15 @@
 import React from "react";
-import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
-import axios from "../api/axios";
+import { useRef, useState, useEffect } from "react";
 import Axios from "axios";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { pink } from "@mui/material/colors";
 
-const LOGIN_URL = "/auth";
-
 function SignIn() {
-  const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
-  const errRef = useRef();
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [, setErrMsg] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
 
   Axios.defaults.withCredentials = true;
@@ -36,7 +29,7 @@ function SignIn() {
 
   useEffect(() => {
     Axios.get("http://localhost:6105/login").then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         setLoginStatus(response.data.user[0].username);
       }
     })
@@ -58,7 +51,7 @@ function SignIn() {
     <div className="container_signin">
       <section>
         <center>
-          <AccountCircleIcon sx={{ fontSize: 75, color: pink }} />
+          <AccountCircleIcon sx={{ fontSize: 100, color: pink }} />
         </center>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>

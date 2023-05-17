@@ -58,7 +58,7 @@ p {
   background-color: aqua;
 }
 
-.container_signin, .container_account {
+.container_signin {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,7 +68,18 @@ p {
     background-color: rgb(224, 17, 95);
 }
 
+.container_account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 1rem 0.5rem;
+    background-color: rgb(141, 51, 237);
+}
+
 section {
+    display: flex;
     width: 100%;
     max-width: 600px;
     min-height: 400px;
@@ -77,8 +88,24 @@ section {
     justify-content: flex-start;
     padding: 1rem;
     background-color: rgba(0,0,0,0.4);
+    border-radius: 1rem;
 }
 
+.accountInfo {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 1rem;
+    text-align: center;
+    align-items: center;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -155,4 +182,14 @@ button {
 
 .line {
     display: inline-block;
+}
+
+@media (max-width: 520px) {
+    .accountInfo, section {
+        min-height: 750px;
+        padding-top: 5rem;
+    }
+    .materialButton {
+        width: 100%;
+    }
 }

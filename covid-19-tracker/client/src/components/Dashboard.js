@@ -110,7 +110,7 @@ function Dashboard() {
           <div className="app__left">
             <div className="app__header">
               <Link to={"/account"}>
-                <AccountCircleIcon sx={{ fontSize: 75, color: blue[500] }} />
+                <AccountCircleIcon sx={{ fontSize: 100, color: blue[500] }} />
               </Link>
               <h1>COVID-19 Tracker</h1>
               <FormControl className="app_dropdown">

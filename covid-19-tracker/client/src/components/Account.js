@@ -99,43 +99,44 @@ function Account() {
               <Button onClick={handleDeleteClose}>CANCEL</Button>
             </DialogActions>
           </Dialog>
+          <section className="accountInfo">
+            <center>
+              <AccountCircleIcon sx={{ fontSize: 150 }} />
+            </center>
 
-          <center>
-            <AccountCircleIcon sx={{ fontSize: 150 }} />
-          </center>
+            <h2 className="accountUsername">{username}</h2>
 
-          <h2 className="accountUsername">{username}</h2>
-
-          <Button
-            style={{ marginBottom: "1.5rem" }}
-            href="/"
-            className="materialButton"
-            variant="contained"
-            color="secondary"
-            startIcon={<HomeIcon sx={{ fontSize: 100 }} />}
-          >
-            Home
-          </Button>
-          <Button
-            onClick={handleDeleteOpen}
-            style={{ marginBottom: "1.5rem" }}
-            className="materialButton"
-            variant="contained"
-            color="secondary"
-            startIcon={<DeleteForeverIcon sx={{ fontSize: 100 }} />}
-          >
-            Delete this Account
-          </Button>
-          <Button
-            onClick={handleClickOpen}
-            style={{ marginBottom: "1.5rem" }}
-            className="materialButton"
-            variant="contained"
-            color="secondary"
-            startIcon={<LogoutIcon sx={{ fontSize: 100 }} />}
-          >
-            Sign Out
-          </Button>
+            <Button
+              style={{ marginBottom: "1.5rem" }}
+              href="/"
+              className="materialButton"
+              variant="contained"
+              color="secondary"
+              startIcon={<HomeIcon sx={{ fontSize: 100 }} />}
+            >
+              Home
+            </Button>
+            <Button
+              onClick={handleDeleteOpen}
+              style={{ marginBottom: "1.5rem" }}
+              className="materialButton"
+              variant="contained"
+              color="secondary"
+              startIcon={<DeleteForeverIcon sx={{ fontSize: 100 }} />}
+            >
+              Delete this Account
+            </Button>
+            <Button
+              onClick={handleClickOpen}
+              style={{ marginBottom: "1.5rem" }}
+              className="materialButton"
+              variant="contained"
+              color="secondary"
+              startIcon={<LogoutIcon sx={{ fontSize: 100 }} />}
+            >
+              Sign Out
+            </Button>
+          </section>
         </div>
       ) : (
         <Dialog open={warningOpen} onClose={handleWarningClose}>
