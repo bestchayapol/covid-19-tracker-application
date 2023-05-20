@@ -5,10 +5,8 @@
 ## Functions
 
 - Users can create an account and log in to access the overview of covid 19 dashboard.
-- The application will display real-time data and statistics about the spread
-of COVID-19 from various sources. Users will be able to browse and search through COVID-19 data by country. Historical data trends and visualizations about the spread of COVID-19 over time will also be available.
--Authorized users will be able to edit or update existing COVID-19 data for
-a location, such as the number of confirmed cases, deaths, or recoveries. They will also be able to edit or update the location-specific details, such as the location name or demographic details.
+- The application will display real-time data and statistics about the spread of COVID-19 from various sources. Users will be able to browse and search through COVID-19 data by country. Historical data trends and visualizations about the spread of COVID-19 over time will also be available.
+-Authorized users will be able to edit or update existing COVID-19 data for a location, such as the number of confirmed cases, deaths, or recoveries. They will also be able to edit or update the location-specific details, such as the location name or demographic details.
 -Authorized users will be able to delete account from the application if it is no longer needed.
 -The application will be mobile-friendly and responsive to ensure users can access information from any device.
 
