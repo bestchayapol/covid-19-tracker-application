@@ -21,7 +21,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 ### Bash 
 ```
 # Clone this repository
-$ git clone https://github.com/bestchayapol/covid-19-tracker-application/
+$ git clone https://github.com/bestchayapol/covid-19-tracker-application.git
 
 # Go into the repository
 $ cd covid-19-tracker
