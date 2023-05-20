@@ -15,15 +15,32 @@
 ![Sign-In](https://github.com/bestchayapol/covid-19-tracker-application/assets/46255972/3070a6b2-e000-4eb7-afef-f249ab5a3570)
 
 ## To run the frontend and backend in developmode 
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+### Bash 
+```
+# Clone this repository
+$ git clone https://github.com/bestchayapol/covid-19-tracker-application/
+
+# Go into the repository
+$ cd covid-19-tracker
+
+# Install dependencies
+$ npm install
+```
+
 ### Frontend
-cd to client and then run
 ```
-    npm start
+$ cd client
+$ npm start
 ```
+
 ### Backend
-cd to server and then run
+
 ```
-    node index.js
+$ cd server
+# node index.js
 ```
 
 ### API endpoints
