@@ -13,8 +13,8 @@ a location, such as the number of confirmed cases, deaths, or recoveries. They w
 -The application will be mobile-friendly and responsive to ensure users can access information from any device.
 
 ## Database schema
-![file:///Users/chayapolmahatthanachai/Desktop/CSC105/Project/Implementation/Register.png]
-![file:///Users/chayapolmahatthanachai/Desktop/CSC105/Project/Implementation/Sign-In.png]
+![Register](https://github.com/bestchayapol/covid-19-tracker-application/assets/46255972/f91437c4-082a-4b42-94eb-cbada70cb04b)
+![Sign-In](https://github.com/bestchayapol/covid-19-tracker-application/assets/46255972/3070a6b2-e000-4eb7-afef-f249ab5a3570)
 
 ## To run the frontend and backend in developmode 
 ### Frontend
